@@ -64,8 +64,8 @@ You should see the EmergeX TUI appear with its splash animation.
 ## Install from Source (Contributors)
 
 \`\`\`bash
-git clone https://github.com/8gi-foundation/emergex-code.git
-cd emergex-code
+git clone https://github.com/Adebayodamilola20/EmergeX_Foundation.git
+cd EmergeX_Foundation
 bun install
 bun run tui
 \`\`\`
