@@ -20,13 +20,13 @@ export function CodeBlock({ code, language }: { code: string; language?: string 
       return (
         <div key={i} className="min-h-[1.25rem]">
           {parts.map((part, j) => {
-            const lowerPart = part.toLowerCase().trim();
+            const cleanPart = part.replace(/[.,()]/g, "").toLowerCase().trim();
             // CLI Commands (Purple)
-            if (["ollama", "emergex", "git", "npm", "bun", "brew", "bash", "sh"].includes(lowerPart)) {
+            if (["ollama", "emergex", "git", "npm", "bun", "brew", "bash", "sh"].includes(cleanPart)) {
               return <span key={j} className="text-[hsl(var(--code-purple))] font-semibold animate-code-glow-purple">{part}</span>;
             }
             // Subcommands/Actions (Blue)
-            if (["auth", "login", "logout", "status", "whoami", "serve", "pull", "run", "install", "init", "push", "checkout", "branch", "merge", "remote", "fetch", "clone", "outline", "symbol", "benchmark", "harness", "inspect", "doctor", "build", "test", "lint"].includes(lowerPart)) {
+            if (["auth", "login", "logout", "status", "whoami", "serve", "pull", "run", "install", "init", "push", "checkout", "branch", "merge", "remote", "fetch", "clone", "outline", "symbol", "benchmark", "harness", "inspect", "doctor", "build", "test", "lint"].includes(cleanPart)) {
                return <span key={j} className="text-[hsl(var(--code-slash))] animate-code-glow">{part}</span>;
             }
             // Environment Variables (Purple values/keys)
@@ -34,18 +34,18 @@ export function CodeBlock({ code, language }: { code: string; language?: string 
               const [key, val] = part.split("=");
               return (
                 <span key={j}>
-                  <span className="text-[hsl(var(--code-purple))]">{key}=</span>
-                  <span className="text-[hsl(var(--code-slash))]">{val}</span>
+                  <span className="text-[hsl(var(--code-purple))] animate-code-glow-purple">{key}=</span>
+                  <span className="text-[hsl(var(--code-slash))] animate-code-glow">{val}</span>
                 </span>
               );
             }
-            // Strings/Arguments
-            if (part.trim().startsWith("http") || part.trim().includes("/") || part.trim().match(/^[a-z0-9.]+:[a-z0-9.]+$/)) {
-              return <span key={j} className="text-[hsl(var(--code-slash))]">{part}</span>;
+            // Strings/Arguments/Paths
+            if (part.trim().startsWith("http") || part.trim().includes("/") || part.trim().match(/^[a-z0-9.]+:[a-z0-9.]+$/) || part.trim().startsWith("@")) {
+              return <span key={j} className="text-[hsl(var(--code-slash))] opacity-90">{part}</span>;
             }
             // Slash Commands
             if (part.startsWith("/")) {
-              return <span key={j} className="text-[hsl(var(--code-slash))]">{part}</span>;
+              return <span key={j} className="text-[hsl(var(--code-slash))] animate-code-glow">{part}</span>;
             }
             return part;
           })}

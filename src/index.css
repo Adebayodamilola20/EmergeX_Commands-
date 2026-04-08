@@ -156,28 +156,30 @@ html {
 
 @keyframes code-glow {
   0%, 100% {
-    text-shadow: 0 0 4px rgba(56, 189, 248, 0);
+    text-shadow: 0 0 8px hsla(var(--code-slash), 0);
   }
   50% {
-    text-shadow: 0 0 12px rgba(56, 189, 248, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
+    text-shadow: 0 0 15px hsla(var(--code-slash), 0.6), 0 0 30px hsla(var(--code-slash), 0.2);
   }
 }
 
 @keyframes code-glow-purple {
   0%, 100% {
-    text-shadow: 0 0 4px rgba(192, 132, 252, 0);
+    text-shadow: 0 0 8px hsla(var(--code-purple), 0);
   }
   50% {
-    text-shadow: 0 0 12px rgba(192, 132, 252, 0.4), 0 0 20px rgba(192, 132, 252, 0.1);
+    text-shadow: 0 0 15px hsla(var(--code-purple), 0.6), 0 0 30px hsla(var(--code-purple), 0.2);
   }
 }
 
 .animate-code-glow {
-  animation: code-glow 3s ease-in-out infinite;
+  animation: code-glow 2.5s ease-in-out infinite;
+  @apply drop-shadow-[0_0_8px_hsla(var(--code-slash),0.3)];
 }
 
 .animate-code-glow-purple {
   animation: code-glow-purple 2s ease-in-out infinite;
+  @apply drop-shadow-[0_0_8px_hsla(var(--code-purple),0.3)];
 }
 
 .reveal {

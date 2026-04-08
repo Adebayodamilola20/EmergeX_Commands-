@@ -63,10 +63,10 @@ function parseInlineMarkdown(text: string): React.ReactNode[] {
       parts.push(
         <code 
           key={key++} 
-          className={`px-1.5 py-0.5 rounded text-sm font-mono border ${
+          className={`px-1.5 py-0.5 rounded text-sm font-mono border transition-all ${
             isPurple 
-              ? "bg-[hsl(var(--code-purple)/0.15)] text-[hsl(var(--code-purple))] border-[hsl(var(--code-purple)/0.3)]" 
-              : "bg-[hsl(var(--code-slash)/0.15)] text-[hsl(var(--code-slash))] border-[hsl(var(--code-slash)/0.3)]"
+              ? "bg-[hsl(var(--code-purple)/0.15)] text-[hsl(var(--code-purple))] border-[hsl(var(--code-purple)/0.3)] animate-code-glow-purple" 
+              : "bg-[hsl(var(--code-slash)/0.15)] text-[hsl(var(--code-slash))] border-[hsl(var(--code-slash)/0.3)] animate-code-glow"
           }`}
         >
           {first.match[1]}
