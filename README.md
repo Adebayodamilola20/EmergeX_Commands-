@@ -34,7 +34,7 @@ This repository contains the source code for the EmergeX documentation website. 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/adebayodamilola20/emergex-documentation-site.git
+   git clone https://github.com/adebayodamilola20/EmergeX_Commands-.git
    ```
 
 2. Install dependencies:
