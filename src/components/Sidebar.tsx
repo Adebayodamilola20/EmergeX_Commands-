@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ChevronDown, ChevronRight, Search, Sun, Moon, Command } from "lucide-react";
 import { navigation, NavItem } from "@/data/types";
+import { useTheme } from "next-themes";
+import { SearchDialog } from "./SearchDialog";
 
 function NavSection({ item, currentSlug }: { item: NavItem; currentSlug: string }) {
   const navigate = useNavigate();
@@ -64,52 +66,57 @@ function NavSection({ item, currentSlug }: { item: NavItem; currentSlug: string 
 }
 
 export function Sidebar({ currentSlug }: { currentSlug: string }) {
-  const [isDark, setIsDark] = useState(true);
+  const { resolvedTheme, setTheme } = useTheme();
+  const [searchOpen, setSearchOpen] = React.useState(false);
+  const isDark = resolvedTheme === "dark";
 
   return (
-    <aside className="w-[280px] shrink-0 h-screen sticky top-0 flex flex-col bg-sidebar border-r border-sidebar-border hidden lg:flex">
-      <div className="p-6 pb-4">
-        <a href="/" className="text-lg font-bold tracking-tight text-foreground flex items-center gap-2.5">
-          <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center text-background">
-            <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-background" />
-          </div>
-          EmergeX Code
-        </a>
-      </div>
+    <>
+      <aside className="w-[280px] shrink-0 h-screen sticky top-0 flex flex-col bg-sidebar border-r border-sidebar-border hidden lg:flex">
+        <div className="p-6 pb-4">
+          <a href="/" className="text-lg font-bold tracking-tight text-foreground flex items-center gap-2.5">
+            <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center text-background">
+              <div className="w-2.5 h-2.5 rounded-full border-[1.5px] border-background" />
+            </div>
+            EmergeX Code
+          </a>
+        </div>
 
-      <div className="px-4 mb-6">
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/20 border border-border/40 text-muted-foreground text-sm hover:border-border/80 transition-colors cursor-pointer group shadow-sm">
-          <Search className="w-3.5 h-3.5 group-hover:text-foreground transition-colors" />
-          <span className="group-hover:text-foreground transition-colors flex-1">Search</span>
-          <div className="flex items-center gap-0.5 text-[10px] font-medium opacity-40 group-hover:opacity-100 transition-opacity">
-            <Command className="w-3 h-3" />
-            <span>K</span>
+        <div className="px-4 mb-6" onClick={() => setSearchOpen(true)}>
+          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/20 border border-border/40 text-muted-foreground text-sm hover:border-border/80 transition-colors cursor-pointer group shadow-sm">
+            <Search className="w-3.5 h-3.5 group-hover:text-foreground transition-colors" />
+            <span className="group-hover:text-foreground transition-colors flex-1">Search</span>
+            <div className="flex items-center gap-0.5 text-[10px] font-medium opacity-40 group-hover:opacity-100 transition-opacity">
+              <Command className="w-3 h-3" />
+              <span>K</span>
+            </div>
           </div>
         </div>
-      </div>
 
-      <nav className="flex-1 overflow-y-auto px-1 custom-scrollbar">
-        {navigation.map((item) => (
-          <NavSection key={item.title} item={item} currentSlug={currentSlug} />
-        ))}
-      </nav>
+        <nav className="flex-1 overflow-y-auto px-1 custom-scrollbar">
+          {navigation.map((item) => (
+            <NavSection key={item.title} item={item} currentSlug={currentSlug} />
+          ))}
+        </nav>
 
-      <div className="mt-auto p-4 flex items-center justify-end">
-        <div className="inline-flex items-center p-1 rounded-full bg-muted/20 border border-border/40 shadow-sm">
-          <button 
-            onClick={() => setIsDark(false)}
-            className={`p-1.5 rounded-full transition-all ${!isDark ? 'bg-foreground text-background shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
-          >
-            <Sun className="w-3.5 h-3.5" />
-          </button>
-          <button 
-            onClick={() => setIsDark(true)}
-            className={`p-1.5 rounded-full transition-all ${isDark ? 'bg-foreground text-background shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
-          >
-            <Moon className="w-3.5 h-3.5" />
-          </button>
+        <div className="mt-auto p-4 flex items-center justify-end">
+          <div className="inline-flex items-center p-1 rounded-full bg-muted/20 border border-border/40 shadow-sm">
+            <button 
+              onClick={() => setTheme("light")}
+              className={`p-1.5 rounded-full transition-all ${!isDark ? 'bg-foreground text-background shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              <Sun className="w-3.5 h-3.5" />
+            </button>
+            <button 
+              onClick={() => setTheme("dark")}
+              className={`p-1.5 rounded-full transition-all ${isDark ? 'bg-foreground text-background shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
+            >
+              <Moon className="w-3.5 h-3.5" />
+            </button>
+          </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+      <SearchDialog open={searchOpen} onOpenChange={setSearchOpen} />
+    </>
   );
 }

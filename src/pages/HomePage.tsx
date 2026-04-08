@@ -7,7 +7,7 @@ export default function HomePage() {
   const cards = [
     { icon: Terminal, title: "Installation", desc: "npm install and start coding", href: "/docs/getting-started/installation" },
     { icon: BookOpen, title: "Documentation", desc: "Architecture, guides, API reference", href: "/docs/getting-started/installation" },
-    { icon: Code2, title: "Source Code", desc: "MIT licensed, contributions welcome", href: "https://github.com/8gi-foundation/emergex-code" },
+    { icon: Code2, title: "Source Code", desc: "MIT licensed, contributions welcome", href: "https://github.com/AdebayoDamilola20/EmergeX_Commands-" },
   ];
 
   return (
@@ -16,7 +16,7 @@ export default function HomePage() {
         <span className="font-bold text-foreground">EmergeX Code<span className="text-primary">.</span></span>
         <div className="flex items-center gap-4 text-sm">
           <button onClick={() => navigate("/docs/getting-started/installation")} className="text-muted-foreground hover:text-foreground transition-colors">Docs</button>
-          <a href="https://github.com/8gi-foundation/emergex-code" className="text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
+          <a href="https://github.com/AdebayoDamilola20/EmergeX_Commands-" className="text-muted-foreground hover:text-foreground transition-colors">GitHub</a>
         </div>
       </header>
 

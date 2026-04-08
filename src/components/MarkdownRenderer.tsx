@@ -1,5 +1,26 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { CodeBlock } from "./CodeBlock";
+
+function Reveal({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target);
+        }
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }
+    );
+
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  }, []);
+
+  return <div ref={ref} className="reveal">{children}</div>;
+}
 
 function parseInlineMarkdown(text: string): React.ReactNode[] {
   const parts: React.ReactNode[] = [];
@@ -122,7 +143,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
         i++;
       }
       i++; // skip closing ```
-      elements.push(<CodeBlock key={key++} code={codeLines.join("\n")} language={lang} />);
+      elements.push(<Reveal key={key++}><CodeBlock code={codeLines.join("\n")} language={lang} /></Reveal>);
       continue;
     }
 
@@ -133,7 +154,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
         tableLines.push(lines[i]);
         i++;
       }
-      elements.push(<React.Fragment key={key++}>{renderTable(tableLines)}</React.Fragment>);
+      elements.push(<Reveal key={key++}>{renderTable(tableLines)}</Reveal>);
       continue;
     }
 
@@ -142,9 +163,11 @@ export function MarkdownRenderer({ content }: { content: string }) {
       const text = line.slice(3);
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
       elements.push(
-        <h2 key={key++} id={id} className="text-2xl font-bold text-heading-color mt-10 mb-4 scroll-mt-6">
-          {parseInlineMarkdown(text)}
-        </h2>
+        <Reveal key={key++}>
+          <h2 id={id} className="text-2xl font-bold text-heading-color mt-10 mb-4 scroll-mt-6">
+            {parseInlineMarkdown(text)}
+          </h2>
+        </Reveal>
       );
       i++;
       continue;
@@ -154,9 +177,11 @@ export function MarkdownRenderer({ content }: { content: string }) {
       const text = line.slice(4);
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
       elements.push(
-        <h3 key={key++} id={id} className="text-xl font-semibold text-heading-color mt-8 mb-3 scroll-mt-6">
-          {parseInlineMarkdown(text)}
-        </h3>
+        <Reveal key={key++}>
+          <h3 id={id} className="text-xl font-semibold text-heading-color mt-8 mb-3 scroll-mt-6">
+            {parseInlineMarkdown(text)}
+          </h3>
+        </Reveal>
       );
       i++;
       continue;
@@ -165,9 +190,11 @@ export function MarkdownRenderer({ content }: { content: string }) {
     // Blockquote
     if (line.startsWith("> ")) {
       elements.push(
-        <blockquote key={key++} className="border-l-2 border-primary pl-4 my-4 text-muted-foreground italic">
-          {parseInlineMarkdown(line.slice(2))}
-        </blockquote>
+        <Reveal key={key++}>
+          <blockquote className="border-l-2 border-primary pl-4 my-4 text-muted-foreground italic">
+            {parseInlineMarkdown(line.slice(2))}
+          </blockquote>
+        </Reveal>
       );
       i++;
       continue;
@@ -181,11 +208,13 @@ export function MarkdownRenderer({ content }: { content: string }) {
         i++;
       }
       elements.push(
-        <ol key={key++} className="list-decimal list-inside my-4 space-y-1.5 text-foreground">
-          {items.map((item, j) => (
-            <li key={j} className="leading-relaxed">{parseInlineMarkdown(item)}</li>
-          ))}
-        </ol>
+        <Reveal key={key++}>
+          <ol className="list-decimal list-inside my-4 space-y-1.5 text-foreground">
+            {items.map((item, j) => (
+              <li key={j} className="leading-relaxed">{parseInlineMarkdown(item)}</li>
+            ))}
+          </ol>
+        </Reveal>
       );
       continue;
     }
@@ -198,11 +227,13 @@ export function MarkdownRenderer({ content }: { content: string }) {
         i++;
       }
       elements.push(
-        <ul key={key++} className="list-disc list-inside my-4 space-y-1.5 text-foreground">
-          {items.map((item, j) => (
-            <li key={j} className="leading-relaxed">{parseInlineMarkdown(item)}</li>
-          ))}
-        </ul>
+        <Reveal key={key++}>
+          <ul className="list-disc list-inside my-4 space-y-1.5 text-foreground">
+            {items.map((item, j) => (
+              <li key={j} className="leading-relaxed">{parseInlineMarkdown(item)}</li>
+            ))}
+          </ul>
+        </Reveal>
       );
       continue;
     }
@@ -215,9 +246,11 @@ export function MarkdownRenderer({ content }: { content: string }) {
 
     // Paragraph
     elements.push(
-      <p key={key++} className="my-3 leading-relaxed text-foreground">
-        {parseInlineMarkdown(line)}
-      </p>
+      <Reveal key={key++}>
+        <p className="my-3 leading-relaxed text-foreground">
+          {parseInlineMarkdown(line)}
+        </p>
+      </Reveal>
     );
     i++;
   }

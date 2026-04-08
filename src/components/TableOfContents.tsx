@@ -39,11 +39,10 @@ export function TableOfContents({ sections }: { sections: DocSection[] }) {
                 )}
                 <a
                   href={`#${s.id}`}
-                  className={`block transition-all duration-200 ${
-                    active 
-                      ? "text-foreground font-medium" 
-                      : "text-muted-foreground hover:text-foreground"
-                  } ${s.level === 3 ? "pl-8" : "pl-4"} py-1.5`}
+                  className={`block transition-all duration-200 ${active
+                    ? "text-foreground font-medium"
+                    : "text-muted-foreground hover:text-foreground"
+                    } ${s.level === 3 ? "pl-8" : "pl-4"} py-1.5`}
                 >
                   {s.title}
                 </a>

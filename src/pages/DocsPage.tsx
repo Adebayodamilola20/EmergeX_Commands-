@@ -35,7 +35,10 @@ export default function DocsPage() {
     <div className="flex min-h-screen">
       <Sidebar currentSlug={slug} />
       <div className="flex-1 flex justify-center min-w-0">
-        <main className="flex-1 max-w-5xl px-12 py-10">
+        <main 
+          key={slug}
+          className="flex-1 max-w-5xl px-12 py-10 animate-content-fade"
+        >
           <div className="mb-2 text-sm text-muted-foreground">{page.category}</div>
           <MarkdownRenderer content={page.content} />
           <Pagination currentSlug={slug} />

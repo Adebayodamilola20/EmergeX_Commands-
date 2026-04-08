@@ -6,6 +6,56 @@
 
 @layer base {
   :root {
+    --background: 210 20% 98%;
+    --foreground: 224 71% 4%;
+    --card: 0 0% 100%;
+    --card-foreground: 224 71% 4%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 224 71% 4%;
+    --primary: 224 71% 4%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+    --radius: 0.5rem;
+
+    --sidebar-background: 210 20% 96%;
+    --sidebar-foreground: 215.4 16.3% 46.9%;
+    --sidebar-primary: 222.2 47.4% 11.2%;
+    --sidebar-primary-foreground: 210 40% 98%;
+    --sidebar-accent: 210 40% 94%;
+    --sidebar-accent-foreground: 222.2 47.4% 11.2%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 215 20.2% 65.1%;
+
+    --code-bg: 210 10% 94%;
+    --code-border: 214.3 31.8% 91.4%;
+    --code-keyword: 275 80% 50%;
+    --code-string: 150 60% 30%;
+    --code-function: 210 70% 50%;
+    --code-comment: 0 0% 50%;
+    --code-number: 30 80% 50%;
+    --code-slash: 210 100% 40%;
+    --code-purple: 275 80% 50%;
+
+    --inline-code-bg: 210 10% 92%;
+    --inline-code-text: 224 71% 10%;
+    --link-color: 215 16% 40%;
+    --heading-color: 224 71% 4%;
+    --table-header-bg: 210 10% 94%;
+    --table-row-hover: 210 10% 96%;
+    --toc-active: 224 71% 4%;
+  }
+
+  .dark {
     --background: 0 0% 4%;
     --foreground: 0 0% 98%;
     --card: 0 0% 6%;
@@ -25,7 +75,6 @@
     --border: 0 0% 14%;
     --input: 0 0% 14%;
     --ring: 0 0% 100%;
-    --radius: 0.5rem;
 
     --sidebar-background: 0 0% 6%;
     --sidebar-foreground: 0 0% 55%;
@@ -56,12 +105,16 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   * {
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans;
+    @apply bg-background text-foreground font-sans transition-colors duration-500;
     font-family: 'Inter', system-ui, sans-serif;
   }
   code, pre {
@@ -99,4 +152,50 @@
 }
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground));
+}
+
+@keyframes code-glow {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(56, 189, 248, 0);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(56, 189, 248, 0.4), 0 0 20px rgba(56, 189, 248, 0.1);
+  }
+}
+
+@keyframes code-glow-purple {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(192, 132, 252, 0);
+  }
+  50% {
+    text-shadow: 0 0 12px rgba(192, 132, 252, 0.4), 0 0 20px rgba(192, 132, 252, 0.1);
+  }
+}
+
+.animate-code-glow {
+  animation: code-glow 3s ease-in-out infinite;
+}
+
+.animate-code-glow-purple {
+  animation: code-glow-purple 2s ease-in-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@keyframes content-fade {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-content-fade {
+  animation: content-fade 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
