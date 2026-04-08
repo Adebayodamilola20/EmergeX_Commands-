@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Terminal, BookOpen, Code2 } from "lucide-react";
+import { CodeBlock } from "@/components/CodeBlock";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -20,17 +21,23 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center px-6">
-        <div className="max-w-2xl w-full">
-          <h1 className="text-5xl font-bold text-heading-color mb-4">EmergeX Code</h1>
-          <p className="text-lg text-foreground mb-8 leading-relaxed">
-            Open source autonomous coding agent. Runs on local LLMs via Ollama.<br />
-            No API keys required, no usage caps, no cloud dependency.
-          </p>
+      <main className="flex-1 flex items-center justify-center px-6 py-12 md:py-20 animate-content-fade">
+        <div className="max-w-3xl w-full">
+          <div className="mb-10 text-center md:text-left">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-heading-color mb-6 tracking-tight">
+              EmergeX Code<span className="text-primary">.</span>
+            </h1>
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
+              Open source autonomous coding agent. Runs on local LLMs via Ollama. 
+              No API keys required, no usage caps, no cloud dependency.
+            </p>
+          </div>
 
-          <div className="rounded-lg border border-code-border bg-code-bg p-4 mb-8 font-mono text-sm shadow-sm">
-            <div className="text-muted-foreground">$ <span className="text-foreground">npm install -g @emergex/emergex-code</span></div>
-            <div className="text-muted-foreground">$ <span className="text-primary">emergex</span></div>
+          <div className="mb-12">
+            <CodeBlock 
+              code={`$ npm install -g @emergex/emergex-code\n$ emergex`} 
+              language="bash" 
+            />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">

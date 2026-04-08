@@ -4,6 +4,12 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  @apply h-full;
+  scroll-behavior: smooth;
+}
+
 @layer base {
   :root {
     --background: 210 20% 98%;
@@ -87,13 +93,13 @@
 
     --code-bg: 0 0% 6%;
     --code-border: 0 0% 14%;
-    --code-keyword: 275 80% 70%;
-    --code-string: 150 60% 60%;
-    --code-function: 210 70% 70%;
-    --code-comment: 0 0% 40%;
-    --code-number: 30 80% 70%;
-    --code-slash: 210 100% 66%;
-    --code-purple: 275 80% 70%;
+    --code-keyword: 285 100% 75%;
+    --code-string: 150 80% 65%;
+    --code-function: 200 100% 70%;
+    --code-comment: 0 0% 45%;
+    --code-number: 35 100% 75%;
+    --code-slash: 190 100% 55%;
+    --code-purple: 290 100% 75%;
 
     --inline-code-bg: 0 0% 12%;
     --inline-code-text: 0 0% 90%;
@@ -113,11 +119,14 @@ html {
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground font-sans transition-colors duration-500;
     font-family: 'Inter', system-ui, sans-serif;
   }
-  code, pre {
+
+  code,
+  pre {
     font-family: 'JetBrains Mono', monospace;
   }
 }
@@ -126,13 +135,16 @@ html {
 .custom-scrollbar::-webkit-scrollbar {
   width: 4px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb {
   background: hsl(var(--sidebar-border));
   border-radius: 10px;
 }
+
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--sidebar-accent-foreground) / 0.2);
 }
@@ -142,44 +154,67 @@ html {
   width: 8px;
   height: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
+
 ::-webkit-scrollbar-thumb {
   background: hsl(var(--border));
   border-radius: 4px;
   border: 2px solid hsl(var(--background));
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: hsl(var(--muted-foreground));
 }
 
-@keyframes code-glow {
-  0%, 100% {
-    text-shadow: 0 0 8px hsla(var(--code-slash), 0);
+@keyframes neon-pulse-slash {
+
+  0%,
+  100% {
+    text-shadow: 0 0 5px hsla(var(--code-slash), 0.4);
+    background: hsla(var(--code-slash), 0.05);
   }
+
   50% {
-    text-shadow: 0 0 15px hsla(var(--code-slash), 0.6), 0 0 30px hsla(var(--code-slash), 0.2);
+    text-shadow: 0 0 15px hsla(var(--code-slash), 1),
+      0 0 35px hsla(var(--code-slash), 0.8),
+      0 0 65px hsla(var(--code-slash), 0.6);
+    background: hsla(var(--code-slash), 0.25);
   }
 }
 
-@keyframes code-glow-purple {
-  0%, 100% {
-    text-shadow: 0 0 8px hsla(var(--code-purple), 0);
+@keyframes neon-pulse-purple {
+
+  0%,
+  100% {
+    text-shadow: 0 0 5px hsla(var(--code-purple), 0.4);
+    background: hsla(var(--code-purple), 0.05);
   }
+
   50% {
-    text-shadow: 0 0 15px hsla(var(--code-purple), 0.6), 0 0 30px hsla(var(--code-purple), 0.2);
+    text-shadow: 0 0 15px hsla(var(--code-purple), 1),
+      0 0 35px hsla(var(--code-purple), 0.8),
+      0 0 65px hsla(var(--code-purple), 0.6);
+    background: hsla(var(--code-purple), 0.25);
   }
 }
 
 .animate-code-glow {
-  animation: code-glow 2.5s ease-in-out infinite;
-  @apply drop-shadow-[0_0_8px_hsla(var(--code-slash),0.3)];
+  animation: neon-pulse-slash 3s ease-in-out infinite;
+  @apply drop-shadow-[0_0_12px_hsla(var(--code-slash),0.5)];
+  padding: 0 4px;
+  border-radius: 4px;
+  @apply font-bold text-[hsl(var(--code-slash))];
 }
 
 .animate-code-glow-purple {
-  animation: code-glow-purple 2s ease-in-out infinite;
-  @apply drop-shadow-[0_0_8px_hsla(var(--code-purple),0.3)];
+  animation: neon-pulse-purple 2.5s ease-in-out infinite;
+  @apply drop-shadow-[0_0_12px_hsla(var(--code-purple),0.5)];
+  padding: 0 4px;
+  border-radius: 4px;
+  @apply font-bold text-[hsl(var(--code-purple))];
 }
 
 .reveal {
@@ -194,8 +229,15 @@ html {
 }
 
 @keyframes content-fade {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-content-fade {

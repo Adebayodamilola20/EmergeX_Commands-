@@ -65,14 +65,14 @@ function NavSection({ item, currentSlug }: { item: NavItem; currentSlug: string 
   );
 }
 
-export function Sidebar({ currentSlug }: { currentSlug: string }) {
+export function Sidebar({ currentSlug, className }: { currentSlug: string; className?: string }) {
   const { resolvedTheme, setTheme } = useTheme();
   const [searchOpen, setSearchOpen] = React.useState(false);
   const isDark = resolvedTheme === "dark";
 
   return (
     <>
-      <aside className="w-[280px] shrink-0 h-screen sticky top-0 flex flex-col bg-sidebar border-r border-sidebar-border hidden lg:flex">
+      <aside className={`w-[280px] shrink-0 h-full flex flex-col bg-sidebar border-r border-sidebar-border ${className}`}>
         <div className="p-6 pb-4">
           <a href="/" className="text-lg font-bold tracking-tight text-foreground flex items-center gap-2.5">
             <div className="w-5 h-5 bg-foreground rounded flex items-center justify-center text-background">
@@ -82,8 +82,11 @@ export function Sidebar({ currentSlug }: { currentSlug: string }) {
           </a>
         </div>
 
-        <div className="px-4 mb-6" onClick={() => setSearchOpen(true)}>
-          <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/20 border border-border/40 text-muted-foreground text-sm hover:border-border/80 transition-colors cursor-pointer group shadow-sm">
+        <div className="px-4 mb-6">
+          <div 
+            onClick={() => setSearchOpen(true)}
+            className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-muted/10 border border-border/40 text-muted-foreground text-sm hover:border-border/80 hover:bg-muted/20 transition-all cursor-pointer group shadow-sm"
+          >
             <Search className="w-3.5 h-3.5 group-hover:text-foreground transition-colors" />
             <span className="group-hover:text-foreground transition-colors flex-1">Search</span>
             <div className="flex items-center gap-0.5 text-[10px] font-medium opacity-40 group-hover:opacity-100 transition-opacity">
@@ -99,8 +102,9 @@ export function Sidebar({ currentSlug }: { currentSlug: string }) {
           ))}
         </nav>
 
-        <div className="mt-auto p-4 flex items-center justify-end">
-          <div className="inline-flex items-center p-1 rounded-full bg-muted/20 border border-border/40 shadow-sm">
+        <div className="mt-auto p-4 flex items-center justify-between border-t border-sidebar-border/40">
+          <div className="text-[10px] text-muted-foreground/50 font-medium px-2 italic">v0.1.0-alpha</div>
+          <div className="inline-flex items-center p-1 rounded-full bg-muted/10 border border-border/40">
             <button 
               onClick={() => setTheme("light")}
               className={`p-1.5 rounded-full transition-all ${!isDark ? 'bg-foreground text-background shadow-sm' : 'text-muted-foreground hover:text-foreground'}`}
