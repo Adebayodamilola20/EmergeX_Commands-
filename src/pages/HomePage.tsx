@@ -7,7 +7,7 @@ export default function HomePage() {
 
   const cards = [
     { icon: Terminal, title: "Installation", desc: "npm install and start coding", href: "/docs/getting-started/installation" },
-    { icon: BookOpen, title: "Documentation", desc: "Architecture, guides, API reference", href: "/docs/getting-started/installation" },
+    { icon: BookOpen, title: "Documentation", desc: "Architecture, guides, API reference", href: "/docs/architecture/overview" },
     { icon: Code2, title: "Source Code", desc: "MIT licensed, contributions welcome", href: "https://github.com/AdebayoDamilola20/EmergeX_Commands-" },
   ];
 
