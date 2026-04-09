@@ -23,10 +23,18 @@ export const installationPage: DocPage = {
 
 ## Install EmergeX
 
+:::tabs
+::tab Mac / Linux
 \`\`\`bash
 sudo npm install -g @emergex/emergex-code
 emergex
 \`\`\`
+::tab Windows
+\`\`\`bash
+npm install -g @emergex/emergex-code
+emergex
+\`\`\`
+:::
 
 That's it. Two commands. EmergeX will guide you through Ollama setup on first launch if needed. Three binary aliases are installed: \`emergex\`, \`emergex-code\`, and \`8\` (the shortcut).
 
@@ -371,18 +379,26 @@ export const apiKeysPage: DocPage = {
     { id: "step-3-tell-emergex", title: "Step 3: Tell EmergeX Which Provider", level: 2 },
     { id: "step-4-start-chatting", title: "Step 4: Start Chatting!", level: 2 },
   ],
-  content: `# How to Setup EmergeX with Only API Keys (No Local Models)
-
-Here is the exact step-by-step terminal guide to get set up exclusively via the CLI:
+  content: `Here is the exact step-by-step terminal guide to get set up exclusively via the CLI:
 
 ## Step 1: Install the CLI
 
+:::tabs
+::tab Mac / Linux
 \`\`\`bash
 sudo npm install -g @emergex/emergex-code
 \`\`\`
+::tab Windows
+\`\`\`bash
+npm install -g @emergex/emergex-code
+\`\`\`
+:::
 
 ## Step 2: Save Your API Key as an Environment Variable
 Tell your computer what your API key is. (Replace \`your_api_key_here\` with the actual key). Choose the provider you want:
+
+:::tabs
+::tab Mac / Linux
 
 If using OpenRouter:
 \`\`\`bash
@@ -400,6 +416,28 @@ export OPENAI_API_KEY="your_api_key_here"
 \`\`\`
 
 *(Note: To make this permanent, add the export line to your \`~/.zshrc\` or \`~/.bashrc\` file).*
+
+::tab Windows
+
+Windows doesn't use \`export\` like Mac does. To set your API keys permanently in your Windows terminal, you need to use the \`setx\` command:
+
+If using OpenRouter:
+\`\`\`powershell
+setx OPENROUTER_API_KEY "your_api_key_here"
+\`\`\`
+
+If using Anthropic:
+\`\`\`powershell
+setx ANTHROPIC_API_KEY "your_api_key_here"
+\`\`\`
+
+If using OpenAI:
+\`\`\`powershell
+setx OPENAI_API_KEY "your_api_key_here"
+\`\`\`
+
+*(IMPORTANT: After you run the \`setx\` command, you must close and reopen your terminal so Windows can load the new key).*
+:::
 
 ## Step 3: Tell EmergeX Which Provider to Use
 Use the \`preferences\` command to switch EmergeX away from the local defaults:

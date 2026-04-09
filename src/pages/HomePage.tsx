@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Terminal, BookOpen, Code2 } from "lucide-react";
 import { CodeBlock } from "@/components/CodeBlock";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../components/ui/tabs";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -34,10 +35,28 @@ export default function HomePage() {
           </div>
 
           <div className="mb-12 animate-content-fade stagger-3">
-            <CodeBlock 
-              code={`$ sudo npm install -g @emergex/emergex-code\n$ emergex`} 
-              language="bash" 
-            />
+            <Tabs defaultValue="mac-linux" className="w-full">
+              <TabsList className="bg-muted border border-border w-full justify-start rounded-b-none h-auto p-0 inline-flex">
+                <TabsTrigger value="mac-linux" className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:border-b-0 border border-transparent data-[state=active]:border-border rounded-none rounded-t-lg px-4 py-2">
+                  Mac / Linux
+                </TabsTrigger>
+                <TabsTrigger value="windows" className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:border-b-0 border border-transparent data-[state=active]:border-border rounded-none rounded-t-lg px-4 py-2">
+                  Windows
+                </TabsTrigger>
+              </TabsList>
+              <TabsContent value="mac-linux" className="mt-0 border border-border border-t-0 p-4 bg-card/50 rounded-b-lg">
+                <CodeBlock 
+                  code={`$ sudo npm install -g @emergex/emergex-code\n$ emergex`} 
+                  language="bash" 
+                />
+              </TabsContent>
+              <TabsContent value="windows" className="mt-0 border border-border border-t-0 p-4 bg-card/50 rounded-b-lg">
+                <CodeBlock 
+                  code={`$ npm install -g @emergex/emergex-code\n$ emergex`} 
+                  language="bash" 
+                />
+              </TabsContent>
+            </Tabs>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 animate-content-fade stagger-4">

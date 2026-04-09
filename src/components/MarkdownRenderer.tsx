@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { CodeBlock } from "./CodeBlock";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
 
 function Reveal({ children }: { children: React.ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -144,6 +145,54 @@ export function MarkdownRenderer({ content }: { content: string }) {
       }
       i++; // skip closing ```
       elements.push(<Reveal key={key++}><div className="animate-content-fade stagger-2"><CodeBlock code={codeLines.join("\n")} language={lang} /></div></Reveal>);
+      continue;
+    }
+
+    // Tabs
+    if (line.startsWith(":::tabs")) {
+      const tabsData: { name: string; contentLines: string[] }[] = [];
+      let currentTab: { name: string; contentLines: string[] } | null = null;
+      i++;
+      while (i < lines.length && !lines[i].startsWith(":::")) {
+        if (lines[i].startsWith("::tab ")) {
+          if (currentTab) tabsData.push(currentTab);
+          currentTab = { name: lines[i].slice(6).trim(), contentLines: [] };
+        } else if (currentTab) {
+          currentTab.contentLines.push(lines[i]);
+        }
+        i++;
+      }
+      if (currentTab) tabsData.push(currentTab);
+      i++; // skip closing :::
+
+      if (tabsData.length > 0) {
+        // Fallback value is the first tab
+        const defaultValue = tabsData[0].name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+        elements.push(
+          <Reveal key={key++}>
+            <Tabs defaultValue={defaultValue} className="my-6 animate-content-fade stagger-2">
+              <TabsList className="bg-muted border border-border w-full justify-start rounded-b-none h-auto p-0 inline-flex">
+                {tabsData.map(tab => {
+                  const val = tab.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                  return (
+                    <TabsTrigger key={val} value={val} className="data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:border-b-0 border border-transparent data-[state=active]:border-border rounded-none rounded-t-lg px-4 py-2">
+                      {tab.name}
+                    </TabsTrigger>
+                  );
+                })}
+              </TabsList>
+              {tabsData.map(tab => {
+                const val = tab.name.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                return (
+                  <TabsContent key={val} value={val} className="mt-0 border border-border border-t-0 p-4 bg-card/50 rounded-b-lg">
+                    <MarkdownRenderer content={tab.contentLines.join("\n")} />
+                  </TabsContent>
+                );
+              })}
+            </Tabs>
+          </Reveal>
+        );
+      }
       continue;
     }
 
