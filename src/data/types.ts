@@ -26,6 +26,7 @@ export const navigation: NavItem[] = [
       { title: "Installation", slug: "getting-started/installation" },
       { title: "Quick Start", slug: "getting-started/quick-start" },
       { title: "Configuration", slug: "getting-started/configuration" },
+      { title: "API Keys Setup", slug: "getting-started/api-keys" },
     ],
   },
   {

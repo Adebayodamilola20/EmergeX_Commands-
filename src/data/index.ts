@@ -1,5 +1,5 @@
 import { DocPage } from "./types";
-import { installationPage, quickStartPage, configurationPage } from "./getting-started";
+import { installationPage, quickStartPage, configurationPage, apiKeysPage } from "./getting-started";
 import { bmadMethodPage, personalizationPage, tuiGuidePage, mcpIntegrationPage, openrouterPage } from "./guides";
 import { architectureOverviewPage, autoresearchPage, modelRouterPage, infiniteGentlemanPage, kernelFineTuningPage } from "./architecture";
 import { benchmarksPage, cliReferencePage, slashCommandsPage, toolsReferencePage, designSystemsPage, hooksReferencePage, contributingPage } from "./reference";
@@ -8,6 +8,7 @@ export const allPages: DocPage[] = [
   installationPage,
   quickStartPage,
   configurationPage,
+  apiKeysPage,
   bmadMethodPage,
   personalizationPage,
   tuiGuidePage,

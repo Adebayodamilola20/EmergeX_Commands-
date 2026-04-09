@@ -359,3 +359,79 @@ See the [MCP Integration guide](/docs/guides/mcp-integration) for setup instruct
 | \`TRAINING_PROXY_URL\` | Override training proxy URL |
 | \`OLLAMA_HOST\` | Override default Ollama URL |`,
 };
+
+export const apiKeysPage: DocPage = {
+  slug: "getting-started/api-keys",
+  title: "API Keys Setup (No Local Models)",
+  description: "How to Setup EmergeX with Only API Keys",
+  category: "Getting Started",
+  sections: [
+    { id: "step-1-install-the-cli", title: "Step 1: Install the CLI", level: 2 },
+    { id: "step-2-save-your-api-key", title: "Step 2: Save Your API Key", level: 2 },
+    { id: "step-3-tell-emergex", title: "Step 3: Tell EmergeX Which Provider", level: 2 },
+    { id: "step-4-start-chatting", title: "Step 4: Start Chatting!", level: 2 },
+  ],
+  content: `# How to Setup EmergeX with Only API Keys (No Local Models)
+
+Here is the exact step-by-step terminal guide to get set up exclusively via the CLI:
+
+## Step 1: Install the CLI
+
+\`\`\`bash
+sudo npm install -g @emergex/emergex-code
+\`\`\`
+
+## Step 2: Save Your API Key as an Environment Variable
+Tell your computer what your API key is. (Replace \`your_api_key_here\` with the actual key). Choose the provider you want:
+
+If using OpenRouter:
+\`\`\`bash
+export OPENROUTER_API_KEY="your_api_key_here"
+\`\`\`
+
+If using Anthropic:
+\`\`\`bash
+export ANTHROPIC_API_KEY="your_api_key_here"
+\`\`\`
+
+If using OpenAI:
+\`\`\`bash
+export OPENAI_API_KEY="your_api_key_here"
+\`\`\`
+
+*(Note: To make this permanent, add the export line to your \`~/.zshrc\` or \`~/.bashrc\` file).*
+
+## Step 3: Tell EmergeX Which Provider to Use
+Use the \`preferences\` command to switch EmergeX away from the local defaults:
+
+If choosing OpenRouter:
+\`\`\`bash
+emergex preferences set provider openrouter
+emergex preferences set model auto:free
+\`\`\`
+
+If choosing Anthropic:
+\`\`\`bash
+emergex preferences set provider anthropic
+emergex preferences set model claude-3-5-sonnet-20241022
+\`\`\`
+
+If choosing OpenAI:
+\`\`\`bash
+emergex preferences set provider openai
+emergex preferences set model gpt-4o
+\`\`\`
+
+## Step 4: Start Chatting!
+Now you can run the terminal chat or launch the interface, and it will immediately route through your API key:
+
+\`\`\`bash
+emergex chat "Write a hello world in Python"
+\`\`\`
+
+Or start the full interface:
+
+\`\`\`bash
+emergex
+\`\`\``,
+};
