@@ -136,6 +136,10 @@ html {
   width: 4px;
 }
 
+.custom-scrollbar {
+  -webkit-overflow-scrolling: touch;
+}
+
 .custom-scrollbar::-webkit-scrollbar-track {
   background: transparent;
 }
@@ -243,3 +247,9 @@ html {
 .animate-content-fade {
   animation: content-fade 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
+
+.stagger-1 { animation-delay: 0.1s; animation-fill-mode: both; }
+.stagger-2 { animation-delay: 0.2s; animation-fill-mode: both; }
+.stagger-3 { animation-delay: 0.3s; animation-fill-mode: both; }
+.stagger-4 { animation-delay: 0.4s; animation-fill-mode: both; }
+.stagger-5 { animation-delay: 0.5s; animation-fill-mode: both; }

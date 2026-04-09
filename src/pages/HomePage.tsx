@@ -21,26 +21,26 @@ export default function HomePage() {
         </div>
       </header>
 
-      <main className="flex-1 flex items-center justify-center px-6 py-12 md:py-20 animate-content-fade">
+      <main className="flex-1 flex items-center justify-center px-6 py-12 md:py-20">
         <div className="max-w-3xl w-full">
           <div className="mb-10 text-center md:text-left">
-            <h1 className="text-4xl md:text-6xl font-extrabold text-heading-color mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-heading-color mb-6 tracking-tight animate-content-fade stagger-1">
               EmergeX Code<span className="text-primary">.</span>
             </h1>
-            <p className="text-base md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0">
+            <p className="text-base md:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto md:mx-0 animate-content-fade stagger-2">
               Open source autonomous coding agent. Runs on local LLMs via Ollama. 
               No API keys required, no usage caps, no cloud dependency.
             </p>
           </div>
 
-          <div className="mb-12">
+          <div className="mb-12 animate-content-fade stagger-3">
             <CodeBlock 
-              code={`$ npm install -g @emergex/emergex-code\n$ emergex`} 
+              code={`$ sudo npm install -g @emergex/emergex-code\n$ emergex`} 
               language="bash" 
             />
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 animate-content-fade stagger-4">
             {cards.map((card) => (
               <button
                 key={card.title}

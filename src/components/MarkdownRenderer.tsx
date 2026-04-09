@@ -143,7 +143,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
         i++;
       }
       i++; // skip closing ```
-      elements.push(<Reveal key={key++}><CodeBlock code={codeLines.join("\n")} language={lang} /></Reveal>);
+      elements.push(<Reveal key={key++}><div className="animate-content-fade stagger-2"><CodeBlock code={codeLines.join("\n")} language={lang} /></div></Reveal>);
       continue;
     }
 
@@ -164,7 +164,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
       const id = text.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
       elements.push(
         <Reveal key={key++}>
-          <h2 id={id} className="text-2xl font-bold text-heading-color mt-10 mb-4 scroll-mt-6">
+          <h2 id={id} className="text-2xl font-bold text-heading-color mt-10 mb-4 scroll-mt-6 animate-content-fade stagger-1">
             {parseInlineMarkdown(text)}
           </h2>
         </Reveal>
@@ -247,7 +247,7 @@ export function MarkdownRenderer({ content }: { content: string }) {
     // Paragraph
     elements.push(
       <Reveal key={key++}>
-        <p className="my-3 leading-relaxed text-foreground">
+        <p className="my-3 leading-relaxed text-foreground animate-content-fade stagger-2">
           {parseInlineMarkdown(line)}
         </p>
       </Reveal>

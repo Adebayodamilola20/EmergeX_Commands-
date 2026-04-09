@@ -34,7 +34,7 @@ export default function DocsPage() {
   }
 
   return (
-    <div className="flex h-[100dvh] overflow-hidden bg-background">
+    <div className="flex h-screen overflow-hidden bg-background">
       <div className="hidden lg:block w-[280px] h-full sticky top-0 border-r border-sidebar-border bg-sidebar overflow-y-auto custom-scrollbar">
         <Sidebar currentSlug={slug} />
       </div>

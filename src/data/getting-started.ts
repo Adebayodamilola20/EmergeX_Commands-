@@ -24,7 +24,7 @@ export const installationPage: DocPage = {
 ## Install EmergeX
 
 \`\`\`bash
-npm install -g @emergex/emergex-code
+sudo npm install -g @emergex/emergex-code
 emergex
 \`\`\`
 
